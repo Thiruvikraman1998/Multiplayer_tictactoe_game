@@ -18,12 +18,12 @@ class TicTacToe extends StatelessWidget {
       title: 'Tic Tac Toe',
       theme: ThemeData.dark()
           .copyWith(scaffoldBackgroundColor: bgColor, useMaterial3: true),
-      home: const MainMenu(),
       routes: {
         MainMenu.routeName: (context) => const MainMenu(),
         CreateRoom.routeName: (context) => const CreateRoom(),
         JoinRoom.routeName: (context) => const JoinRoom()
       },
+      initialRoute: MainMenu.routeName,
     );
   }
 }
