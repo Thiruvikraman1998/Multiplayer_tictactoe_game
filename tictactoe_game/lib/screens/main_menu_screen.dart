@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tictactoe_game/responsive/responsive.dart';
 import 'package:tictactoe_game/widgets/buttons/main_menu_buttons.dart';
 
 class MainMenu extends StatelessWidget {
@@ -7,7 +8,7 @@ class MainMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      body: Responsive(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
