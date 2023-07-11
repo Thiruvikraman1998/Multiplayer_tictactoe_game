@@ -13,9 +13,14 @@ class MainMenuButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressedEvent,
       style: ElevatedButton.styleFrom(
-        minimumSize: Size(width / 5, 50),
+          minimumSize: Size(width, 50),
+          backgroundColor: Colors.amber,
+          foregroundColor: Colors.white,
+          shape: const BeveledRectangleBorder()),
+      child: Text(
+        lable,
+        style: const TextStyle(fontSize: 20),
       ),
-      child: Text(lable),
     );
   }
 }
