@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:tictactoe_game/responsive/responsive.dart';
+import 'package:tictactoe_game/screens/create_room_screen.dart';
+import 'package:tictactoe_game/screens/join_room_screen.dart';
 import 'package:tictactoe_game/widgets/buttons/main_menu_buttons.dart';
 
 class MainMenu extends StatelessWidget {
+  static String routeName = "/main_menu";
   const MainMenu({super.key});
 
   @override
@@ -12,9 +15,17 @@ class MainMenu extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            MainMenuButton(onPressedEvent: () {}, lable: "Create Room"),
+            MainMenuButton(
+                onPressedEvent: () {
+                  Navigator.pushNamed(context, CreateRoom.routeName);
+                },
+                lable: "Create Room"),
             const SizedBox(height: 30),
-            MainMenuButton(onPressedEvent: () {}, lable: "Join Room")
+            MainMenuButton(
+                onPressedEvent: () {
+                  Navigator.pushNamed(context, JoinRoom.routeName);
+                },
+                lable: "Join Room")
           ],
         ),
       ),
