@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tictactoe_game/resources/socket_methods.dart';
 import 'package:tictactoe_game/responsive/responsive.dart';
 import 'package:tictactoe_game/widgets/buttons/main_menu_buttons.dart';
 import 'package:tictactoe_game/widgets/custom_text.dart';
@@ -14,6 +15,7 @@ class CreateRoom extends StatefulWidget {
 
 class _CreateRoomState extends State<CreateRoom> {
   final TextEditingController _nameController = TextEditingController();
+  final SocketMethods _socketMethods = SocketMethods();
 
   @override
   void dispose() {
@@ -39,7 +41,11 @@ class _CreateRoomState extends State<CreateRoom> {
               CustomTextField(
                   hintText: 'Enter your name', controller: _nameController),
               SizedBox(height: size.height * 0.05),
-              MainMenuButton(lable: 'Create', onPressedEvent: () {})
+              MainMenuButton(
+                  lable: 'Create',
+                  onPressedEvent: () {
+                    _socketMethods.createRoom(_nameController.text);
+                  })
             ],
           ),
         ),
