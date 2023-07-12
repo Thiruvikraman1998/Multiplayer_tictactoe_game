@@ -1,5 +1,8 @@
+// mongo db password: lvczDhVlKywXyXWO
+
 const express = require("express");
 const http = require("http");
+const mongoose = require("mongoose");
 
 // initialize and store express in app 
 const app = express();
@@ -11,6 +14,15 @@ var server = http.createServer(app);  // creates a server, here createServer() t
 var socketio = require("socket.io");
 var io = socketio(server);  
 // short hand code for above two lines is: var io = require("socket.io")(server);
+
+//connect db
+const DB = "mongodb+srv://developmentthiru:lvczDhVlKywXyXWO@cluster0.vuh5yyg.mongodb.net/?retryWrites=true&w=majority";
+
+mongoose.connect(DB).then(()=>{
+    console.log("Connection successful");
+}).catch((e)=>{
+    console.log(e);
+});
 
 
 //middle ware, where the data from client goes to the middle ware and converts to json or do some functions and reaches to server.
