@@ -11,6 +11,7 @@ const port = process.env.PORT || 3000;  // once server deployed to web it runs w
 
 var server = http.createServer(app);  // creates a server, here createServer() takes and argument requestListner, here app is that listener
 
+const Room = require('./models/room_model');
 // var socketio = require("socket.io");
 // var io = socketio(server);  
 // short hand code for above two lines is: 
@@ -27,6 +28,7 @@ io.on("connection", (socket) =>{
     console.log("connected sockets");
     socket.on("createRoom", async ({name})=>{
         console.log(name);
+        let room = new Room();
     })
 });
 
