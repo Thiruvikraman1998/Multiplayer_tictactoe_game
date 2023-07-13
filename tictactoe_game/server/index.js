@@ -76,7 +76,9 @@ io.on("connection", (socket) =>{
             }else{
                 socket.emit("error", "Game Started, could not join, try again later");
             }
-        }catch(e){}
+        }catch(e){
+            console.log(e)
+        }
     });
 });
 

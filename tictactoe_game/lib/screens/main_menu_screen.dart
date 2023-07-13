@@ -12,21 +12,24 @@ class MainMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Responsive(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            MainMenuButton(
-                onPressedEvent: () {
-                  Navigator.pushNamed(context, CreateRoom.routeName);
-                },
-                lable: "Create Room"),
-            const SizedBox(height: 30),
-            MainMenuButton(
-                onPressedEvent: () {
-                  Navigator.pushNamed(context, JoinRoom.routeName);
-                },
-                lable: "Join Room")
-          ],
+        child: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 10),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              MainMenuButton(
+                  onPressedEvent: () {
+                    Navigator.pushNamed(context, CreateRoom.routeName);
+                  },
+                  lable: "Create Room"),
+              const SizedBox(height: 30),
+              MainMenuButton(
+                  onPressedEvent: () {
+                    Navigator.pushNamed(context, JoinRoom.routeName);
+                  },
+                  lable: "Join Room")
+            ],
+          ),
         ),
       ),
     );

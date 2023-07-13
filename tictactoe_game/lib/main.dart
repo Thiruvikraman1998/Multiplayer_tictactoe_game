@@ -20,6 +20,7 @@ class TicTacToe extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => RoomDataProvider(),
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Tic Tac Toe',
         theme: ThemeData.dark()
             .copyWith(scaffoldBackgroundColor: bgColor, useMaterial3: true),
