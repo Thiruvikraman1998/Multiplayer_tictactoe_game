@@ -26,6 +26,8 @@ const DB = "mongodb+srv://developmentthiru:lvczDhVlKywXyXWO@cluster0.vuh5yyg.mon
 
 io.on("connection", (socket) =>{
     console.log("connected sockets");
+
+    // create room
     socket.on("createRoom", async ({name})=>{
         console.log(name);
         console.log(socket.id);
@@ -49,7 +51,33 @@ io.on("connection", (socket) =>{
         }catch(e){
             console.log(e.toString());
         }
-    })
+    });
+
+    // join room
+    socket.on("joinRoom", async ({name, roomId}) =>{
+        try{
+            if(!roomId.match(/^[0-9a-fA-F]{24}$/)){  // match(/^[0-9a-fA-F]{24}$/) to check whether the roomId from the user is a valid mongoDb generated id using this regEx values.
+                socket.emit("error", "Please enter a valid ID");
+                return;
+            }
+
+            let room = await Room.findById(roomId);
+
+            if(room.isJoin){
+                let player = {
+                    name: name,
+                    socketId: socket.id,
+                    playerType: 'O'
+                }
+                socket.join(roomId);
+                room.players.push(player);
+                room.save();
+                io.to(roomId).emit("joinRoomSuccess!", room);
+            }else{
+                socket.emit("error", "Game Started, could not join, try again later");
+            }
+        }catch(e){}
+    });
 });
 
 mongoose.connect(DB).then(()=>{

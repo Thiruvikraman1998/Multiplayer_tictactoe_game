@@ -3,21 +3,47 @@ import 'package:provider/provider.dart';
 import 'package:tictactoe_game/provider/room_data_provider.dart';
 import 'package:tictactoe_game/resources/socket_io.dart';
 import 'package:tictactoe_game/screens/game_screen.dart';
+import 'package:tictactoe_game/utils/snackbar.dart';
 
 class SocketMethods {
   final _socketClient = SocketClient.instance!.socket!;
 
+  //Emit methods
   void createRoom(String name) {
     if (name.isNotEmpty) {
       _socketClient.emit("createRoom", {'name': name});
     }
   }
 
+  void joinRoom(String name, String roomId) {
+    if (name.isNotEmpty && roomId.isNotEmpty) {
+      _socketClient.emit("joinRoom", {
+        'name': name,
+        'roomId': roomId,
+      });
+    }
+  }
+
+  //Listener methods
   void createRoomSuccessListener(BuildContext context) {
     _socketClient.on("CreateRoomSuccess!", (room) {
       Provider.of<RoomDataProvider>(context, listen: false)
           .updateroomData(room);
       Navigator.pushNamed(context, GameScreen.routeName);
+    });
+  }
+
+  void joinRoomSuccessListener(BuildContext context) {
+    _socketClient.on("joinRoomSuccess!", (room) {
+      Provider.of<RoomDataProvider>(context, listen: false)
+          .updateroomData(room);
+      Navigator.pushNamed(context, GameScreen.routeName);
+    });
+  }
+
+  void errorListener(BuildContext context) {
+    _socketClient.on("error", (errorMessage) {
+      showSnackBar(context, errorMessage);
     });
   }
 }
