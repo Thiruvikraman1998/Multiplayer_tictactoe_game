@@ -28,7 +28,27 @@ io.on("connection", (socket) =>{
     console.log("connected sockets");
     socket.on("createRoom", async ({name})=>{
         console.log(name);
-        let room = new Room();
+        console.log(socket.id);
+        try{
+            let room = new Room();
+        
+        let player = {
+            socketId: socket.id,
+            name: name,
+            playerType: 'X'
+        };
+        room.players.push(player);  // push() is nothing but add() in dart. adding the player object to the players list that is located in room model.
+        room.turn = player;   // who ever creates a room has the first turn.
+        room = await room.save();  // saves the room data to mongo db.
+        // now after saving the room the mongo db automatically genereates an _id and gives to us, we'll now store it to a variable
+        const roomId = room._id.toString();
+
+        socket.join(roomId);  // passes to the specific game.
+
+        io.to(roomId).emit("CreateRoomSuccess!", room);
+        }catch(e){
+            console.log(e.toString());
+        }
     })
 });
 
