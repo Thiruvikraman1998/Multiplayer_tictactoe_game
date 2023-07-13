@@ -25,8 +25,8 @@ const DB = "mongodb+srv://developmentthiru:lvczDhVlKywXyXWO@cluster0.vuh5yyg.mon
 
 io.on("connection", (socket) =>{
     console.log("connected sockets");
-    socket.on("createRoom", ({name})=>{
-        console.log('name');
+    socket.on("createRoom", async ({name})=>{
+        console.log(name);
     })
 });
 

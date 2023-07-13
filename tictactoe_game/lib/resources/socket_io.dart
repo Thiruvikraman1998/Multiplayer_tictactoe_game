@@ -11,10 +11,12 @@ class SocketClient {
       'autoConnect': false
     });
     socket!.connect();
+    socket!
+        .onConnect((data) => print('connection successfull${data.toString()}'));
   }
 
-  static SocketClient get instance {
+  static SocketClient? get instance {
     _instance ??= SocketClient._internal();
-    return _instance!;
+    return _instance;
   }
 }
