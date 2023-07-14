@@ -23,7 +23,7 @@ class Player {
     return Player(
       name: map['name'] ?? '',
       socketId: map['socketId'] ?? '',
-      points: map['points'] ?? '',
+      points: map['points'] ?? 0.0,
       playerType: map['playerType'] ?? '',
     );
   }
