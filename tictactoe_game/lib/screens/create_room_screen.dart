@@ -50,7 +50,7 @@ class _CreateRoomState extends State<CreateRoom> {
               MainMenuButton(
                   lable: 'Create',
                   onPressedEvent: () {
-                    _socketMethods.createRoom(_nameController.text);
+                    _socketMethods.createRoom(context, _nameController.text);
                   })
             ],
           ),

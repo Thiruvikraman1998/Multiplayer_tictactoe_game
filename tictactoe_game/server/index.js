@@ -24,6 +24,7 @@ app.use(express.json());
 //connect db
 const DB = "mongodb+srv://developmentthiru:lvczDhVlKywXyXWO@cluster0.vuh5yyg.mongodb.net/?retryWrites=true&w=majority";
 
+console.log("socket connection ready to connect");
 io.on("connection", (socket) =>{
     console.log("connected sockets");
 
@@ -71,6 +72,7 @@ io.on("connection", (socket) =>{
                 }
                 socket.join(roomId);
                 room.players.push(player);
+                room.isJoin = false;
                 room.save();
                 io.to(roomId).emit("joinRoomSuccess!", room);
             }else{
@@ -83,7 +85,7 @@ io.on("connection", (socket) =>{
 });
 
 mongoose.connect(DB).then(()=>{
-    console.log("Connection successful");
+    console.log("Mongo DB Connection successful");
 }).catch((e)=>{
     console.log(e);
 });

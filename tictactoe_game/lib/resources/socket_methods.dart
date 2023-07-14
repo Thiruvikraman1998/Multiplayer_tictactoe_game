@@ -9,9 +9,12 @@ class SocketMethods {
   final _socketClient = SocketClient.instance!.socket!;
 
   //Emit methods
-  void createRoom(String name) {
+  void createRoom(BuildContext context, String name) {
     if (name.isNotEmpty) {
       _socketClient.emit("createRoom", {'name': name});
+      return;
+    } else if (name.isEmpty) {
+      showSnackBar(context, "Name is Empty, enter a name");
     }
   }
 
@@ -44,6 +47,15 @@ class SocketMethods {
   void errorListener(BuildContext context) {
     _socketClient.on("error", (errorMessage) {
       showSnackBar(context, errorMessage);
+    });
+  }
+
+  void updatePlayerStateListener(BuildContext context) {
+    _socketClient.on("updatePlayers", (playerData) {
+      Provider.of<RoomDataProvider>(context, listen: false)
+          .updatePlayer1(playerData[0]);
+      Provider.of<RoomDataProvider>(context, listen: false)
+          .updatePlayer1(playerData[1]);
     });
   }
 }
