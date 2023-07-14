@@ -30,6 +30,7 @@ class _WatitingLobbyState extends State<WatitingLobby> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const Text('Waiting for Player to join'),
         const SizedBox(height: 20),

@@ -24,7 +24,7 @@ app.use(express.json());
 //connect db
 const DB = "mongodb+srv://developmentthiru:lvczDhVlKywXyXWO@cluster0.vuh5yyg.mongodb.net/?retryWrites=true&w=majority";
 
-console.log("socket connection ready to connect");
+console.log("socket connection ready to connect!");
 io.on("connection", (socket) =>{
     console.log("connected sockets");
 
@@ -75,6 +75,8 @@ io.on("connection", (socket) =>{
                 room.isJoin = false;
                 room.save();
                 io.to(roomId).emit("joinRoomSuccess!", room);
+                io.to(roomId).emit("updatePlayers", room.players);
+                io.to(roomId).emit("updateRoom", room);   // this line he
             }else{
                 socket.emit("error", "Game Started, could not join, try again later");
             }
