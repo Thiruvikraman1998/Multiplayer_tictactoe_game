@@ -14,13 +14,14 @@ class GameScreen extends StatefulWidget {
 class _GameScreenState extends State<GameScreen> {
   @override
   Widget build(BuildContext context) {
-    //RoomDataProvider roomDataProvider = Provider.of<RoomDataProvider>(context);
+    RoomDataProvider roomDataProvider = Provider.of<RoomDataProvider>(context);
     String data = Provider.of<RoomDataProvider>(context).roomData.toString();
     return Scaffold(
-        body: Center(
-      child: Center(
-        child: Text(data),
-      ),
-    ));
+      body: roomDataProvider.roomData['isJoin']
+          ? const WatitingLobby()
+          : Center(
+              child: Text(data),
+            ),
+    );
   }
 }
